@@ -29,3 +29,19 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    _instanceof:
+        App\Shared\QueryBusHandler:
+            tags:
+                - { name: messenger.message_handler, bus: query.bus }
+
+        App\Shared\QueryHandler:
+            tags: ['query.handler']
+
+    App\Shared\QueryDispatcherHandler:
+        arguments:
+            - !tagged_iterator query.handler
+
+    App\Result\Domain\ResultRepository: '@App\Result\Infrastructure\ResultApiRepository'
+    
+    App\Result\Infrastructure\ResultNormalizer:
+        tags: ['serializer.normalizer']

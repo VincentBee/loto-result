@@ -1,0 +1,2 @@
+services:
+    App\Result\Domain\ResultRepository: '@App\Result\Infrastructure\ResultNoopRepository'

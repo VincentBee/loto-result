@@ -1,0 +1,21 @@
+@mixin itemSize($size) {
+    &.number {
+        height: $size;
+        width: $size;
+        span {
+            line-height: $size;
+        }
+        &::after {
+            height: $size;
+            width: $size;
+        }
+    }
+    &.star {
+        height: $size;
+        width: $size;
+        svg {
+            height: $size;
+            width: $size;
+        }
+    }
+}
