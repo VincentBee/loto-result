@@ -26,13 +26,13 @@ class ResultNormalizerTest extends TestCase
             [
                 "drawn_at" => "2021-02-09T21:30:00+01:00",
                 "results" => [
-                    ["value" => "1"],
-                    ["value" => "2"],
-                    ["value" => "3"],
-                    ["value" => "4"],
-                    ["value" => "5"],
-                    ["value" => "6"],
-                    ["value" => "7"],
+                    ["value" => "1", "type" => "number"],
+                    ["value" => "2", "type" => "number"],
+                    ["value" => "3", "type" => "number"],
+                    ["value" => "4", "type" => "number"],
+                    ["value" => "5", "type" => "number"],
+                    ["value" => "6", "type" => "special"],
+                    ["value" => "7", "type" => "special"],
                 ],
                 "addons" => [
                     ["value" => "ME 065 0382"]

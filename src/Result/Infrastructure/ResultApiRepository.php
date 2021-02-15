@@ -21,15 +21,21 @@ class ResultApiRepository implements ResultRepository
      */
     private $serializer;
 
-    public function __construct(HttpClientInterface $client, SerializerInterface $serializer)
+    /**
+     * @var string
+     */
+    private $apiUrl;
+
+    public function __construct(HttpClientInterface $client, SerializerInterface $serializer, string $apiUrl)
     {
         $this->client = $client;
         $this->serializer = $serializer;
+        $this->apiUrl = $apiUrl;
     }
 
     public function getLastResult(): Result
     {
-        $response = $this->client->request('GET', 'https://www.fdj.fr/api/service-draws/v1/games/euromillions/draws?include=results,addons&range=0-0');
+        $response = $this->client->request('GET', $this->apiUrl);
 
         $content = $response->getContent();
 

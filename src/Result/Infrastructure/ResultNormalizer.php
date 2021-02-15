@@ -14,16 +14,24 @@ class ResultNormalizer implements ContextAwareDenormalizerInterface
         $results = [];
 
         foreach ($data as $dataItem) {
-            $values = array_map(function ($item) {
+            $numberValues = array_values(array_map(function ($item) {
                 return intval($item['value']);
-            }, $dataItem['results']);
+            }, array_filter($dataItem['results'], function ($item) {
+                return $item['type'] === 'number';
+            })));
+
+            $starValues = array_values(array_map(function ($item) {
+                return intval($item['value']);
+            }, array_filter($dataItem['results'], function ($item) {
+                return $item['type'] === 'special';
+            })));
 
             $result = new Result();
             $result
                 ->setDate(new \DateTime($dataItem['drawn_at']))
                 ->setCode($dataItem['addons'][0]['value'])
-                ->setNumbers(array_slice($values, 0, 5))
-                ->setStars(array_slice($values, 5, 2))
+                ->setNumbers($numberValues)
+                ->setStars($starValues)
             ;
 
             $results[] = $result;
